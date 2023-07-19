@@ -8,6 +8,8 @@ package projeto02.java;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import views.Interface;
+import views.Interface02;
+import views.Interface03;
 
 /**
  *
@@ -16,7 +18,9 @@ import views.Interface;
 public class Projeto02Java {
 
     public static void main(String[] args) {
-        Interface janela = new Interface();
+        //Interface janela = new Interface();
+        Interface02 s = new Interface02();
+        Interface03 a = new Interface03();
     }
     
     public static void metodoJOption(){
