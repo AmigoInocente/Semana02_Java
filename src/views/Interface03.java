@@ -5,15 +5,20 @@
  */
 package views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 /**
  *
  * @author alisson_formento
  */
 public class Interface03 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Interface03
-     */
+    private int tempoRestante;
+    private int tempoInicial = 1;
+    private Timer timer;
+    
     public Interface03() {
         initComponents();
     }
@@ -69,9 +74,34 @@ public class Interface03 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
-        // TODO add your handling code here:
+        tempoRestante = tempoInicial * 60; //TEMPO INCIAL CONVERTIDO EM SEGUNDOS
+        
+        timer = new Timer(1000, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                atualizaTempo();
+            }
+        });
+        timer.start();
+        start.setEnabled(false);
     }//GEN-LAST:event_startActionPerformed
 
+    
+    private void atualizaTempo(){
+        
+        System.out.println("");
+        int minutos = tempoRestante / 60; // INT SÓ PEGA O NUMERO ANTES DA VIRGULA, SE USASSE DOUBLE PEGARIA OS NUMEROS DEPOIS DA VIRGULA TAMBÉM
+        int segundos = tempoRestante % 60;
+        
+        String tempoText = String.format("%02d:%02d", minutos, segundos); // 2 DIGITOS, DOIS PONTOS, MAIS DOIS DIGITOS
+        
+        this.tempo.setText(tempoText); // THIS É OPICIONAL(ESCOPO GLOBAL DENTRO DESTE ARQUIVO)
+        
+        tempoRestante--; // DIMINUI 1 SEGUNDO DO CONTADOR
+        if(tempoRestante < 0){
+            timer.stop();
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */

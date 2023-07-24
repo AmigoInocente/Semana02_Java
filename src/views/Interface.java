@@ -17,6 +17,7 @@ import javax.swing.JTextField;
  *
  * @author alisson_formento
  */
+
 public class Interface {
     
     //NÃO PODE EXECUTAR NENHUMA LÓGICA(FUNÇÃO) DENTRO DA CLASSE, SOMENTE VARIAVEIS

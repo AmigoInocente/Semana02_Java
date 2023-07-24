@@ -21,6 +21,8 @@ public class Projeto02Java {
         //Interface janela = new Interface();
         Interface02 s = new Interface02();
         Interface03 a = new Interface03();
+        s.setVisible(true);
+        a.setVisible(true);
     }
     
     public static void metodoJOption(){
