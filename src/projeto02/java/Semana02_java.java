@@ -5,7 +5,15 @@
  */
 package projeto02.java;
 
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.io.File;
 import java.util.Scanner;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 //import views.interface01;
 import views.Interface02;
@@ -13,13 +21,52 @@ import views.Interface03;
 import views.interface04;
 
 public class Semana02_java {
-
+    
+    private static JFrame view;
+    
     public static void main(String[] args) {
+        view = new interface04();
+        view.setVisible(true);
         
-        new interface04().setVisible(true);
+        //new interface04().setVisible(true);
         //new Interface03().setVisible(true);
         //new Interface02().setVisible(true);
         //metodoJoption(); 
+        createIconTray();
+    }
+    
+    public static void createIconTray(){
+        if(!SystemTray.isSupported()){
+            System.out.println("Não tem suporte.");
+            return;
+        }
+        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator + "assets" + File.separator + "tray.png";
+        
+        Image icon = new ImageIcon(path).getImage();
+        PopupMenu menu = new PopupMenu();
+        MenuItem fechar = new MenuItem("FECHAR");
+        MenuItem open = new MenuItem("ABRIR");
+        menu.add(open);
+        menu.add(fechar);
+        
+        open.addActionListener((ActionEvent) -> {
+            view.setVisible(true);
+        });
+        
+        fechar.addActionListener((ActionEvent) -> {
+            System.exit(0);
+        });
+        
+        TrayIcon tray = new TrayIcon(icon, "Pomodoro");
+        
+        SystemTray bandeja = SystemTray.getSystemTray();
+        
+        try{
+            bandeja.add(tray);
+        }catch(Exception e){
+            System.out.println("Não foi possivel adicionar o Try...");
+        }
+        
     }
     
     public static void metodoJoption() {
